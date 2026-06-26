@@ -28,6 +28,7 @@ Requirements
 
 Build
 
+```bash
 gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
 -Iglad/include -o main -L. -lglfw3 -lopengl32 -lgdi32
 
