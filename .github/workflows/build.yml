@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     
     steps:
@@ -16,18 +16,52 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libglfw3-dev libgl1-mesa-dev
+        sudo apt-get install -y libglfw3-dev libgl1-mesa-dev pkg-config build-essential
     
-    - name: Compile
+    - name: Verify GLFW installation
       run: |
-        gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
-        -Iglad/include -o main -lglfw3 -lGL -lm
+        pkg-config --cflags --libs glfw3
+        pkg-config --list-all | grep -i glfw
     
-    - name: Check if executable created
+    - name: Compile for Linux
+      run: |
+        gcc -Wall -Wextra main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
+        -Iglad/include $(pkg-config --cflags --libs glfw3) -lGL -lm -o main
+    
+    - name: Check if executable was created
       run: |
         if [ -f main ]; then
           echo "✅ Build successful!"
           ls -lh main
+          file main
+          echo "Executable dependencies:"
+          ldd main | grep -E 'libglfw|libGL|libm'
+        else
+          echo "❌ Build failed - executable not found"
+          exit 1
+        fi
+
+  build-macos:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        brew install glfw3 pkg-config
+    
+    - name: Compile for macOS
+      run: |
+        gcc -Wall -Wextra main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
+        -Iglad/include $(pkg-config --cflags --libs glfw3) -framework OpenGL -lm -o main
+    
+    - name: Check if executable was created
+      run: |
+        if [ -f main ]; then
+          echo "✅ macOS build successful!"
+          ls -lh main
+          file main
         else
           echo "❌ Build failed"
           exit 1
