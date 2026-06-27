@@ -23,30 +23,60 @@ A 3D atom orbital visualiser written in C using OpenGL, GLFW and GLAD.
 
 * C compiler (GCC or Clang)
 * OpenGL
-* GLFW
+* GLFW 3.x
 * GLAD
 
 ## Build
 
-### Linux
+### Linux (Debian/Ubuntu)
+
+Install dependencies:
+```bash
+sudo apt-get update
+sudo apt-get install -y libglfw3-dev libgl1-mesa-dev build-essential
+```
+
+Build:
+```bash
+gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
+-Iglad/include -o main -lglfw3 -lGL -lm
+```
+
+### Linux (Fedora/RHEL)
+
+Install dependencies:
+```bash
+sudo dnf install glfw-devel mesa-libGL-devel gcc
+```
+
+Build:
 ```bash
 gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
 -Iglad/include -o main -lglfw3 -lGL -lm
 ```
 
 ### macOS
+
+Install dependencies:
+```bash
+brew install glfw3
+```
+
+Build:
 ```bash
 gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
--Iglad/include -o main -lglfw3 -lGL -lm
+-Iglad/include -o main -lglfw3 -framework OpenGL -lm
 ```
 
 ### Windows (MinGW)
+
 ```bash
 gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
 -Iglad/include -o main.exe -L. -lglfw3 -lopengl32 -lgdi32
 ```
 
 ### Windows (Visual Studio)
+
 ```bash
 cl main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
 /I glad/include /link glfw3.lib opengl32.lib user32.lib
