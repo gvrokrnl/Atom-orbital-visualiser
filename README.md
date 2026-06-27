@@ -14,10 +14,10 @@ Features
 Controls
 
 * Left Mouse Button + Drag — Rotate the camera
-* R — Open the settings menu (in console)
-* N, L, M — Change quantum numbers
-* Alpha — Adjust orbital transparency
-* Color Type — Switch between coloring modes
+* R - Open the settings menu (in console)
+* N, L, M - Change quantum numbers
+* Alpha - Adjust orbital transparency
+* Color Type - Switch between coloring modes
 
 Requirements
 
