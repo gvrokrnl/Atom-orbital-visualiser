@@ -4,6 +4,14 @@ A 3D atom orbital visualiser written in C using OpenGL, GLFW and GLAD.
 
 ## Screenshots
 
+| 3s Orbital (N=3, L=0, M=0) | 3p Orbital (N=3, L=1, M=0) |
+|---|---|
+| ![3s](screenshots/2.png) | ![3p](screenshots/3.png) |
+
+| 5d Orbital (N=5, L=2, M=0) | 5g Orbital (N=5, L=4, M=0) |
+|---|---|
+| ![5d](screenshots/4.png) | ![5g](screenshots/5.png) |
+
 ### Orbitals
 
 
