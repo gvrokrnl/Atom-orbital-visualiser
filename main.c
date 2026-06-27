@@ -59,6 +59,13 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
    }
 }
 
+void fix_qnumbers(void) {
+   if (l < 0) l = 0;
+   if (l > n - 1) l = n - 1;
+   if (m < -l) m = -l;
+   if (m > l) m = l;
+}
+
 int read_int(const char *name, int current, int min, int max) {
    char input[64];
    int value;
@@ -83,6 +90,7 @@ int read_int(const char *name, int current, int min, int max) {
 
    if (value < min || value > max) {
       printf("Error. %s must be from %d to %d\n", name, min, max);
+      
       return current;
    }
 
@@ -161,14 +169,20 @@ void settings_menu(void) {
       switch (choice) {
          case 1:
             n = read_int("N", n, 1, 10000);
+            fix_qnumbers();
+            need_geometry_update = 1;
             break;
 
          case 2: 
             l = read_int("L", l, 0, (n - 1));
+            fix_qnumbers();
+            need_geometry_update = 1;
             break;
 
          case 3:
             m = read_int("M", m, -l, l);
+            fix_qnumbers();
+            need_geometry_update = 1;
             break;
 
          case 4:
