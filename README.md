@@ -28,20 +28,29 @@ Requirements
 
 ## Screenshots
 
-### Menu
-![Menu](screenshots/1.png)
+### Orbitals
 
-### 1s Orbital (N=3, L=0, M=0)
-![1s orbital](screenshots/2.png)
+<div style="display: flex; gap: 20px;">
+  <div>
+    <h4>1s Orbital (N=3, L=0, M=0)</h4>
+    <img src="screenshots/2.png" width="300">
+  </div>
+  <div>
+    <h4>2p Orbital (N=3, L=1, M=0)</h4>
+    <img src="screenshots/3.png" width="300">
+  </div>
+</div>
 
-### 2p Orbital (N=3, L=1, M=0)
-![2p orbital](screenshots/3.png)
-
-### 3d Orbital (N=5, L=2, M=0)
-![3d orbital](screenshots/4.png)
-
-### 5f Orbital (N=5, L=4, M=0)
-![5f orbital](screenshots/5.png)
+<div style="display: flex; gap: 20px;">
+  <div>
+    <h4>3d Orbital (N=5, L=2, M=0)</h4>
+    <img src="screenshots/4.png" width="300">
+  </div>
+  <div>
+    <h4>5f Orbital (N=5, L=4, M=0)</h4>
+    <img src="screenshots/5.png" width="300">
+  </div>
+</div>
 
 Build
 
