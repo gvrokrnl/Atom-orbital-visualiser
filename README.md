@@ -2,6 +2,18 @@
 
 A 3D atom orbital visualiser written in C using OpenGL, GLFW and GLAD.
 
+## Screenshots
+
+### Orbitals
+
+| 1s Orbital (N=3, L=0, M=0) | 2p Orbital (N=3, L=1, M=0) |
+|---|---|
+| ![1s](screenshots/2.png) | ![2p](screenshots/3.png) |
+
+| 3d Orbital (N=5, L=2, M=0) | 5f Orbital (N=5, L=4, M=0) |
+|---|---|
+| ![3d](screenshots/4.png) | ![5f](screenshots/5.png) |
+
 ## Features
 
 * Interactive 3D visualization of atomic orbitals
@@ -93,18 +105,6 @@ cl main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
 ```bash
 main.exe
 ```
-
-## Screenshots
-
-### Orbitals
-
-| 1s Orbital (N=3, L=0, M=0) | 2p Orbital (N=3, L=1, M=0) |
-|---|---|
-| ![1s](screenshots/2.png) | ![2p](screenshots/3.png) |
-
-| 3d Orbital (N=5, L=2, M=0) | 5f Orbital (N=5, L=4, M=0) |
-|---|---|
-| ![3d](screenshots/4.png) | ![5f](screenshots/5.png) |
 
 ## License
 
