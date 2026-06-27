@@ -32,22 +32,22 @@ Requirements
 
 <div style="display: flex; gap: 20px;">
   <div>
-    <h4>1s Orbital (N=3, L=0, M=0)</h4>
+    <h4>1s Orbital (N=3, L=0, M=0, Color type = 1) </h4>
     <img src="screenshots/2.png" width="300">
   </div>
   <div>
-    <h4>2p Orbital (N=3, L=1, M=0)</h4>
+    <h4>2p Orbital (N=3, L=1, M=0, Color type = 2)</h4>
     <img src="screenshots/3.png" width="300">
   </div>
 </div>
 
 <div style="display: flex; gap: 20px;">
   <div>
-    <h4>3d Orbital (N=5, L=2, M=0)</h4>
+    <h4>3d Orbital (N=5, L=2, M=0, Color type = 1)</h4>
     <img src="screenshots/4.png" width="300">
   </div>
   <div>
-    <h4>5f Orbital (N=5, L=4, M=0)</h4>
+    <h4>5f Orbital (N=5, L=4, M=0, Color type = 2)</h4>
     <img src="screenshots/5.png" width="300">
   </div>
 </div>
