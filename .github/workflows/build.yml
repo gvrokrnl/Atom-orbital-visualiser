@@ -1,0 +1,34 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libglfw3-dev libgl1-mesa-dev
+    
+    - name: Compile
+      run: |
+        gcc main.c window.c shader.c mesh.c renderer.c orbital.c glad/src/gl.c \
+        -Iglad/include -o main -L. -lglfw3 -lopengl32 -lm
+    
+    - name: Check if executable created
+      run: |
+        if [ -f main ]; then
+          echo "✅ Build successful!"
+          ls -lh main
+        else
+          echo "❌ Build failed - executable not found"
+          exit 1
+        fi
