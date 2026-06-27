@@ -26,6 +26,23 @@ Requirements
 * GLFW
 * GLAD
 
+## Screenshots
+
+### Menu
+![Menu](screenshots/1.png)
+
+### 1s Orbital (N=3, L=0, M=0)
+![1s orbital](screenshots/2.png)
+
+### 2p Orbital (N=3, L=1, M=0)
+![2p orbital](screenshots/3.png)
+
+### 3d Orbital (N=5, L=2, M=0)
+![3d orbital](screenshots/4.png)
+
+### 5f Orbital (N=5, L=4, M=0)
+![5f orbital](screenshots/5.png)
+
 Build
 
 ```bash
