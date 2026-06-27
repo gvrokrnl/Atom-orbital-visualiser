@@ -37,6 +37,49 @@ float rand01() {
     return (float)rand() / RAND_MAX;
 }
 
+float clamp01(float x) {
+    if (x < 0.0f) return 0.0f;
+    if (x > 1.0f) return 1.0f;
+    return x;
+}
+
+float smoothstep(float edge0, float edge1, float x) {
+    x = clamp01((x - edge0)) / (edge1 - edge0);
+    return x * x * (3.0f - 2.0f * x);
+}
+
+float mix_float(float a, float b, float t) {
+    return a * (1.0f - t) + b * t;
+}
+
+void APPLY_DENSITY_HIGHLIGHT(
+    float *r_col,
+    float *g_col,
+    float *b_col,
+    double density,
+    double max_density
+) {
+    if (max_density <= 0.0) {
+        return;
+    }
+
+float ratio = (float)(density / max_density);
+ratio = clamp01(ratio);
+
+const float highlight_start = 0.75f;
+const float highlight_full = 0.88f;
+
+float highlight = smoothstep(highlight_start, highlight_full, ratio);
+
+const float hr = 1.0f;
+const float hg = 1.0f;
+const float hb = 0.0f;
+
+*r_col = mix_float(*r_col, hr, highlight);
+*g_col = mix_float(*g_col, hg, highlight);
+*b_col = mix_float(*b_col, hb, highlight);
+}
+
 double ASSOC_LEGENDRE(int l, int m, float x) {
 
     if (l < 0 || m < 0 || m > l) {
@@ -146,7 +189,7 @@ double FIND_MACSIM(int n, int l, int m) {
         }
     }
     
-    return (max == 0.0) ? 0.0001 : max;
+    return (max == 0.0) ? 0.0001 : max * 1.05;
 }
 
 void BUILD_ORBITAL(float *vertices, int point_count, int n, int l, int m) {
@@ -213,9 +256,15 @@ void INIT_ORBITAL_PARTICLES(Particle *particles, int point_count, int n, int l, 
         particles[i].phi_speed = 0.0005f; // normal speed
         // particles[i].phi_speed = 0.00001f + (((float)rand() / RAND_MAX) * 0.0025f); //random speed
 
-        particles[i].r_col = r1 * (1.0f - t) + r2 * t;
-        particles[i].g_col = g1 * (1.0f - t) + g2 * t;
-        particles[i].b_col = b1 * (1.0f - t) + b2 * t;
+        float cr = r1 * (1.0f - t) + r2 * t;
+        float cg = g1 * (1.0f - t) + g2 * t;
+        float cb = b1 * (1.0f - t) + b2 * t;
+
+        APPLY_DENSITY_HIGHLIGHT(&cr, &cg, &cb, pdensity, max_density);
+
+        particles[i].r_col = cr;
+        particles[i].g_col = cg;
+        particles[i].b_col = cb;
 
         i++;
     }
@@ -265,16 +314,23 @@ void INIT_ORBITAL_PARTICLES_DIF(Particle *particles, int point_count, int n, int
         particles[i].phi = (float)phi;
 
         particles[i].phi_speed = 0.0005f; // speed
+        float cr, cg, cb;
 
         if (psi >= 0.0) {
-            particles[i].r_col = r1 * fade;
-            particles[i].g_col = g1 * fade;
-            particles[i].b_col = b1 * fade;
+            cr = r1 * fade;
+            cg = g1 * fade;
+            cb = b1 * fade;
         } else {
-            particles[i].r_col = r2 * fade;
-            particles[i].g_col = g2 * fade;
-            particles[i].b_col = b2 * fade;
+            cr = r2 * fade;
+            cg = g2 * fade;
+            cb = b2 * fade;
         }
+
+        APPLY_DENSITY_HIGHLIGHT(&cr, &cg, &cb, pdensity, max_density);
+
+        particles[i].r_col = cr;
+        particles[i].g_col = cg;
+        particles[i].b_col = cb;
 
         i++;
         }
